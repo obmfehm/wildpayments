@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wild Payments
 
-## Getting Started
+[Live demo](https://wildpayments.vercel.app/)
 
-First, run the development server:
+| Username               | Password |
+| ---------------------- | -------- |
+| admin@wildpayments.com | test     |
+| user@wildpayments.com  | test     |
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Approach
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I chose a monolithic architecture using Next.js, Chakra as the UI library, PostgreSQL as the relational database, and Prisma as the ORM. For authentication and authorization, I utilized NextAuth. I adopted this approach to achieve simplicity and rapid development.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Next.js
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+I chose Next.js because it offers simplicity and provides a unified development environment with a single codebase, making it efficient for rapid development. Additionally, Next.js excels in handling navigation, routing, and API routes. Its integrated routing system simplifies navigation, eliminating the need for extra libraries. Furthermore, I was able to define API routes within my application, which proved to be a significant time-saver.
 
-## Learn More
+### PostgreSQL
 
-To learn more about Next.js, take a look at the following resources:
+I chose PostgreSQL for my payment application because of its crucial role in ensuring the integrity, scalability, and consistency required for financial transactions. The database's ACID compliance adds an extra layer of reliability, making it a secure and robust choice for handling sensitive financial data.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prisma
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+I chose Prisma for its seamless integration with Next.js, simplicity, and intuitive syntax.
 
-## Deploy on Vercel
+### NextAuth
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+As you may have noticed, my primary considerations centered around simplicity and rapid development. This is why I chose NextAuth for authentication, given its seamless integration with Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Better alternative
+
+While my choice of a monolithic architecture prioritized simplicity and rapid development, a microservices architecture could have offered benefits in terms of scalability, maintainability, and flexibility. In an alternative approach, I could have chosen a microservices architecture for the payment application. This strategy could involve developing two main components – Customer Information Management and Payment Management – designed to be isolated and independently scalable. These microservices would communicate with a Single-Page Application (SPA) through an API Gateway.
+
+## Scalability and failure tolerance
+
+Choosing a monolithic architecture means that the components are closely linked, making it difficult to scale specific features and handle failures. The challenge in scaling comes from these tight connections, and if one part fails, it can affect the entire system. Identifying issues during failures becomes difficult, posing a challenge to the overall reliability of the application.
+
+While addressing scaling challenges, the monolithic architecture often relies on vertical scaling, achieved by upgrading server resources (CPU, RAM) as needed. However, it's important to note that vertical scaling has its limits, becoming less efficient and cost-effective for sustained, long-term growth.
+
+### Better alternative
+
+Had I chosen a microservices architecture, scaling specific features and handling failures would have been more seamless. Microservices excel in scalability and failure tolerance due to their decentralized nature. Each microservice operates independently, allowing for easy horizontal scaling by adding more instances. Failures in one microservice typically don't spread to the entire system, enhancing overall resilience.
